@@ -1,7 +1,7 @@
 #include<stdio.h>
 int xf,yf,time,min;
 int cntr;
-int a[101][101];
+int a[1010][1010];
 int m,n;
 int posx[4]={-1,1,0,0},posy[4]={0,0,1,-1};
 void rescue(int c,int b){
