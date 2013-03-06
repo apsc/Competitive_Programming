@@ -1,11 +1,12 @@
-#include<stdio.h>
-int a[10000];
-int cntr=0;
-int cnt=0;
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+string str;
+int a[26];
 void quick(int low,int high){
      if(low>=high)return;
      int temp;     
-     cntr+=high-low;
      int mid=(low+high)/2;
      if((a[high]>a[mid]&&a[high]<a[low])||(a[high]>a[low]&&a[high]<a[mid])){
                      temp=a[high];
@@ -17,7 +18,6 @@ void quick(int low,int high){
                      a[mid]=a[low];
                      a[low]=temp;
      }
-     
      int i=low+1,j=low+1,pivot=a[low];
      while(j<=high){
                    if(a[j]<pivot){
@@ -25,8 +25,6 @@ void quick(int low,int high){
                                     a[j]=a[i];
                                     a[i]=temp;
                                     i++;
-                                    cnt++;
-                                    //cntr++;
                    }
                    j++;              
      }     
@@ -39,20 +37,29 @@ void quick(int low,int high){
      quick(i+1,high);
 }
 int main(){
-    
-    int t,n;
-    scanf("%d",&n);
+    int cntr=1,t,len,i,ans;
+    freopen("input.txt","r",stdin);
+    freopen("output.txt","w",stdout);
+    scanf("%d",&t);
     while(t--){
-    scanf("%d",&n);
-    cnt=0;
-    for(int i=0;i<n;i++){
-            scanf("%d",&a[i]);        
-    }
-    quick(0,n-1);
-    for(int i=0;i<n;i++){
-            printf("%d\n",a[i]);        
-    }
-    printf("%d",cnt);
+          getline(cin,str);
+          len=str.size();
+          if(len==0){
+                     getline(cin,str);
+                     len=str.size();
+          }
+          memset(a,0,sizeof a);
+          for(i=0;i<len;i++){
+              if(str[i]>=97&&str[i]<=122)a[str[i]-97]++;
+              else if(str[i]>=65&&str[i]<=90)a[str[i]-65]++;
+          }
+          quick(0,25);
+          ans=0;
+          for(i=25;i>=0;i--){
+               if(a[i]==0)break;
+               ans+=((i+1)*a[i]);
+          }
+          printf("Case #%d: %d\n",cntr++,ans);
     }
     return 0;
 }
