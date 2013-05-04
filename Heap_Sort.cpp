@@ -26,7 +26,7 @@ int main(){
     int t,n;
     
     scanf("%d",&t);
-    t=10;
+    //t=10;
     while(t--){
                scanf("%d",&n);
                for(int i=0;i<n;i++){
